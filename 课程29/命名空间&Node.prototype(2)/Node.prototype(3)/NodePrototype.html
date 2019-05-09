@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Node.prototype</title>
+</head>
+<body>
+<ul>
+    <li id="item1">选项1</li>
+    <li id="item2">选项2</li>
+    <li id="item3">选项3</li>
+    <li id="item4">选项4</li>
+    <li id="item5">选项5</li>
+</ul>
+<script>
+    // 当我们想调用getSiblings与addClass时，命名空间的写法：jrhDom.getSiblings(node);jrhDom.addClass(node,classes);
+    // 试想一下：
+    // node.getSiblings()与 jrhDom.getSiblings(node)哪一种写法更好呢？
+    // node.addClass(classes)与 jrhDom.addClass(node,classes)哪一种写法会让人更加明白代码的"语意"
+    // 很显然是前者~~~
+    Node.prototype.getSiblings = function(){
+        var allChildren = this.parentNode.children;
+        var array = {
+            length:0
+        }
+        for(var i=0;i<allChildren.length;i++){
+            if(allChildren[i] !== this){
+                array[array.length] = allChildren[i];
+                array.length += 1;
+            }
+        }
+        return array;
+    }
+    Node.prototype.addClass = function(classes){
+        for(var key in classes){
+            var value = classes[key];
+            var methodName = value?'add':'remove';
+            this.classList[methodName](key);
+        }
+    }
+    // 回顾下call();call(this,arguments[0],arguments[1],...arguments[n])。
+    // item3.getSiblings.call(item3) 相当于 item3.getSiblings()
+    // 为什么要使用call()？因为，不使用call()的话，你怎么会理解this呢？
+    // console.log(item3.getSiblings.call(item4)); 返回的结果是：
+    /*
+    * Object
+    * 0: li#item1
+    * 1: li#item2
+    * 2: li#item3
+    * 3: li#item5
+    * length: 4
+    * __proto__: Object
+    *
+    * */
+    // 只有call()才是"硬核"
+    console.log(item3.getSiblings.call(item3));
+    item3.addClass.call(item3,{a:true});
+</script>
+</body>
+</html>

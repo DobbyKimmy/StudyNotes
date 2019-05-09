@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery初探1</title>
+    <script src="./jquery-3.4.1.js">
+    </script>
+    <style>
+        .red{color: red;}
+        .green{color:green}
+        .yellow{color:yellow}
+        .blue{color:blue}
+        .black{color:black}
+    </style>
+</head>
+<body>
+<ul>
+    <li id="item1" class="red">选项1</li>
+    <li id="item2" class="red">选项1</li>
+    <li id="item3" class="red">选项1</li>
+    <li id="item4" class="red">选项1</li>
+    <li id="item5" class="red">选项1</li>
+</ul>
+<script>
+    var nodes = jQuery('ul>li');
+    // jQuery addClass 支持两种方法
+    // 1  .addClass( className )
+    // 示例：
+    // nodes.addClass('red');
+    // 2  .addClass( function(index, currentClass) )
+    // 示例：
+    /*nodes.addClass((index,currentClass)=> {
+        if(index<3){return 'red'};
+    })*/
+    // 3  jQuery支持链式操作
+    // 示例：
+    var classes = ['red','green','yellow','blue','black'];
+    nodes.removeClass('red').addClass(function (index,currentClass) {
+        return classes[index];
+    })
+</script>
+</body>
+</html>

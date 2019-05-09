@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQueryReview</title>
+</head>
+<style>
+    .red{
+        color: red;
+    }
+</style>
+<body>
+<ul>
+    <li id="item1">选项1</li>
+    <li id="item2">选项2</li>
+    <li id="item3">选项3</li>
+    <li id="item4">选项4</li>
+    <li id="item5">选项5</li>
+</ul>
+<script>
+    window.jQuery = function(nodeOrSelector){
+        let nodes = {};
+        if(typeof nodeOrSelector === 'string'){
+            var temp = document.querySelectorAll(nodeOrSelector);
+            for(var i=0;i<temp.length;i++){
+                nodes[i] = temp[i];
+            }
+            nodes.length = temp.length;
+        }else if (nodeOrSelector instanceof Node) {
+            nodes[0] = nodeOrSelector;
+            nodes.length = 1;
+        }
+        nodes.addClass = function (classes) {
+            for(var key in classes){
+                var value = classes[key];
+                var method = value? 'add':'remove';
+                for(var i=0;i<nodes.length;i++){
+                    nodes[i].classList[method](key);
+                }
+            }
+        }
+        nodes.text = function (text) {
+            if(text === undefined){
+                // 获取文本内容
+                var texts = [];
+                for(var i=0;i<nodes.length;i++){
+                    texts.push(nodes[i].textContent);
+                }
+                return texts;
+            }else{
+                // 改变文本内容
+                for(var i=0;i<nodes.length;i++){
+                    nodes[i].textContent = text;
+                }
+            }
+        }
+        return nodes;
+    }
+    var node = jQuery('ul>li');
+    node.addClass.call(node,{red:true})
+    console.log(node.text());
+    node.text.call(node,'hi');
+</script>
+</body>
+</html>

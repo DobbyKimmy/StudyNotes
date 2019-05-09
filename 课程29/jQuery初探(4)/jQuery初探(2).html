@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery初探2</title>
+    <script src="jquery-3.4.1.js"></script>
+    <style>
+        .red{color:red}
+    </style>
+</head>
+<body>
+<ul>
+    <li id="item1">选项1</li>
+    <li id="item2">选项2</li>
+    <li id="item3">选项3</li>
+    <li id="item4">选项4</li>
+    <li id="item5">选项5</li>
+</ul>
+<button id="btn">click</button>
+<script>
+    var nodes = jQuery('ul>li');
+    btn.onclick = function () {
+        // toggle的含义为:开关，切换
+        // 如果nodes有red这样的class则删除，如果没有则添加
+        nodes.toggleClass('red');
+    }
+</script>
+</body>
+</html>

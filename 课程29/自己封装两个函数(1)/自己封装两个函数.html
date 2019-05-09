@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自己封装两个函数</title>
+</head>
+<body>
+<ul>
+    <li id="item1">选项1</li>
+    <li id="item2">选项2</li>
+    <li id="item3">选项3</li>
+    <li id="item4">选项4</li>
+    <li id="item5">选项5</li>
+</ul>
+<script>
+    // 获取传入节点的所有"兄弟",结果返回一个包装好的对象
+    function getSiblings(node){
+        var allChildren = node.parentNode.children;
+        var array = {
+            length:0
+        }
+        for(var i=0;i<allChildren.length;i++){
+            if(allChildren[i]!==node){
+                array[array.length] = allChildren[i];
+                array.length += 1;
+            }
+        }
+        return array;
+    }
+    // 对节点添加或删除class,传入一个节点和一个对象如：{a:true,b:false,c:true}
+    // 当传入对象的value值为true则表示在node的classList中添加它的key,如果为false,则表示在node的classList中删除key
+    function addClass(node,classes) {
+        for(var key in classes){
+            if(classes[key]){
+                node.classList.add(key);
+            }else{
+                node.classList.remove(key);
+            }
+        }
+    }
+</script>
+</body>
+</html>

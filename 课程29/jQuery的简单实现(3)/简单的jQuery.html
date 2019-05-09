@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>简单的jQuery</title>
+</head>
+<style type="text/css">
+    .red{
+        color: red;
+    }
+</style>
+<body>
+<ul>
+    <li id="item1">选项1</li>
+    <li id="item2">选项2</li>
+    <li id="item3">选项3</li>
+    <li id="item4">选项4</li>
+    <li id="item5">选项5</li>
+</ul>
+<script>
+    // 继Node.prototype后，我们将jQuery这个属性添加到window这个全局对象当中
+    // var node = jQuery(argument);向 jQuery这个函数中传入的参数可以是节点或者是选择器(字符串);函数返回一个对象
+    // 对象中有 addClass,text等属性，这些属性对应了上节课所实现的函数;对于getSiblings()这个方法实现起来相对比较复杂,所以先忽略这个方法
+    window.jQuery = function (nodeOrSelector) {
+        let nodes = {};
+        if(typeof nodeOrSelector === 'string'){
+            var temp = document.querySelectorAll(nodeOrSelector);
+            for(var i=0;i<temp.length;i++){
+                nodes[i] = temp[i];
+            }
+            nodes.length = temp.length;
+        }else if(nodeOrSelector instanceof Node){
+            nodes[0] = nodeOrSelector;
+            nodes.length = 1;
+        }
+        // 函数addClass与函数外的变量nodes形成了一个闭包
+        nodes.addClass = function(classes){
+            for(var key in classes){
+                var value = classes[key];
+                var methodName = value? 'add':'remove';
+                for(var i=0;i<nodes.length;i++){
+                    nodes[i].classList[methodName](key);
+                }
+            }
+        }
+        // 函数text与函数外的变量 nodes形成了一个必报
+        nodes.text = function (text) {
+            // 如果text函数什么都没有传入 则表示获取textContent
+            if(text === undefined){
+                var texts = [];
+                for(let i=0;i<nodes.length;i++){
+                    texts.push(nodes[i].textContent);
+                }
+                // 务必要将nodes这个对象返回~~
+                return texts;
+            }else{
+                // 如果text函数传入了值，则表示将textContent的值设置为传入的值
+                // 会将获取到的element所有的值都变为 传入的值
+                for(let i=0;i<nodes.length;i++){
+                    nodes[i].textContent = text;
+                }
+            }
+        }
+        // 务必要将nodes这个对象返回~~
+        return nodes;
+    }
+    var node = jQuery('ul>li');
+    console.log(node.text());
+    node.text.call(node,'hi');
+    node.addClass.call(node,{'red':true});
+</script>
+</body>
+</html>
