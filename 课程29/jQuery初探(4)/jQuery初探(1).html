@@ -22,7 +22,8 @@
     <li id="item5" class="red">选项1</li>
 </ul>
 <script>
-    var nodes = jQuery('ul>li');
+    //  jQuery获取id
+    var nodes = $('#item1');
     // jQuery addClass 支持两种方法
     // 1  .addClass( className )
     // 示例：
@@ -35,9 +36,10 @@
     // 3  jQuery支持链式操作
     // 示例：
     var classes = ['red','green','yellow','blue','black'];
-    nodes.removeClass('red').addClass(function (index,currentClass) {
+    /*nodes.removeClass('red').addClass(function (index,currentClass) {
         return classes[index];
-    })
+    })*/
+    nodes.addClass('green');
 </script>
 </body>
 </html>
