@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自己再认真写一遍</title>
+    <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+    <style>
+        .images{
+            display: flex;
+            transition: all 0.6s;
+        }
+        .window{
+            width: 400px;
+            overflow: hidden;
+        }
+        .wrapper{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px;
+        }
+        .buttons{
+            margin-top: 4px;
+        }
+        .buttons>span{
+            display: inline-block;
+            text-align: center;
+            width: 28px;
+            height: 28px;
+            font-size: 12px;
+            line-height: 28px;
+            background: #eeeeee;
+            border-radius: 50%;
+            margin: 0 8px;
+            box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.75);
+            background: radial-gradient(ellipse at center, #1e5799 0%,#b2b7b6 0%,#000000 100%);
+        }
+        .buttons>span:hover{
+            cursor: pointer;
+        }
+        .green{
+            color: lightgreen;
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <div id="window" class="window">
+        <div id="images" class="images">
+            <img src="../轮播初实现/luffy.jpg" alt="" width="400" height="400">
+            <img src="../轮播初实现/zoro.jpg" alt="" width="400" height="400">
+            <img src="../轮播初实现/nami.jpg" alt="" width="400" height="400">
+            <img src="../轮播初实现/wusuopu.jpg" alt="" width="400" height="400">
+            <img src="../轮播初实现/shanzhi.jpg" alt="" width="400" height="400">
+            <img src="../轮播初实现/qiaoba.jpg" alt="" width="400" height="400">
+        </div>
+    </div>
+</div>
+<div class="wrapper">
+    <div id="buttons" class="buttons">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+        <span>4</span>
+        <span>5</span>
+        <span>6</span>
+    </div>
+</div>
+<script>
+    var allButtons = $('#buttons > span');
+    for(let i=0;i<allButtons.length;i++){
+        allButtons.eq(i).on('click',function (x) {
+            var index = $(x.currentTarget).index();
+            var p = -400*index;
+            $('#images').css({
+                transform:'translate('+p+'px)'
+            })
+            // 添加green类
+            activeButton($(x.currentTarget));
+            n = index;
+        })
+    }
+    function activeButton($button) {
+        $button
+            .addClass('green')
+            .siblings('.green')
+            .removeClass('green')
+    }
+
+    var n = 0;
+    var size = allButtons.length;
+    // 需要先执行一次，原因是因为，在刚刚打开页面时，就让第一张图片对应的button处于active的状态
+    allButtons.eq(n%size).trigger('click');
+    var intervalId = setTimer();
+    function setTimer(){
+        return setInterval(function () {
+            n+=1;
+            allButtons.eq(n%size).trigger('click');
+        },3000)
+    }
+    $('#window').on('mouseenter',function () {
+        window.clearInterval(intervalId);
+    })
+    $('#window').on('mouseleave',function () {
+        intervalId = setTimer();
+    })
+</script>
+</body>
+</html>

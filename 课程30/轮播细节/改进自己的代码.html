@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>改进自己的代码</title>
+    <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+    <style>
+        .images{
+            display: flex;
+            transition: all 0.6s;
+        }
+        .window{
+            width: 400px;
+            overflow: hidden;
+        }
+        .wrapper{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px;
+        }
+        .buttons{
+            margin-top: 4px;
+        }
+        .buttons>span{
+            display: inline-block;
+            text-align: center;
+            width: 28px;
+            height: 28px;
+            font-size: 12px;
+            line-height: 28px;
+            background: #eeeeee;
+            border-radius: 50%;
+            margin: 0 8px;
+            box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.75);
+            background: radial-gradient(ellipse at center, #1e5799 0%,#b2b7b6 0%,#000000 100%);
+        }
+        .buttons>span:hover{
+            cursor: pointer;
+        }
+        .green{
+            color: lightgreen;
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <div id="window" class="window">
+        <div id="images" class="images">
+            <img src="../轮播初实现/luffy.jpg" alt="" width="400" height="400">
+            <img src="../轮播初实现/zoro.jpg" alt="" width="400" height="400">
+            <img src="../轮播初实现/nami.jpg" alt="" width="400" height="400">
+            <img src="../轮播初实现/wusuopu.jpg" alt="" width="400" height="400">
+            <img src="../轮播初实现/shanzhi.jpg" alt="" width="400" height="400">
+            <img src="../轮播初实现/qiaoba.jpg" alt="" width="400" height="400">
+        </div>
+    </div>
+</div>
+<div class="wrapper">
+    <div id="buttons" class="buttons">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+        <span>4</span>
+        <span>5</span>
+        <span>6</span>
+    </div>
+</div>
+<script>
+    var allButtons = $('#buttons > span');
+    console.log(allButtons);
+    for(let i = 0;i<allButtons.length;i++){
+        $(allButtons[i]).on('click',function (x) {
+            var index = $(x.currentTarget).index();
+            var p = index * -400;
+            $('#images').css({
+                transform:'translate('+p+'px)'
+            })
+            n = index;
+            activeButton(allButtons.eq(n));
+        })
+    }
+    var n = 0;
+    var size = allButtons.length;
+    allButtons.eq(n%size).trigger('click');
+
+    var timerId = setTimer();
+    function setTimer() {
+        return setInterval(()=>{
+            n += 1;
+            allButtons.eq(n%size).trigger('click');
+        },3000)
+    }
+    function activeButton($button) {
+        $button
+            .addClass('green')
+            .siblings('.green').removeClass('green');
+    }
+    $('.window').on('mouseenter',function () {
+        window.clearInterval(timerId)
+    })
+    $('.window').on('mouseleave',function () {
+        timerId = setTimer()
+    })
+</script>
+</body>
+</html>

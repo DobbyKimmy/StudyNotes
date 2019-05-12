@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>轮播细节</title>
+    <script src="../内容样式行为分离/jquery-3.4.1.js"></script>
+    <style>
+        .window{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .images{
+            display: flex;
+            transition: all 0.6s;
+        }
+        .wrapper{
+            width: 300px;
+            overflow: hidden;
+        }
+        .buttons{
+            text-align: center;
+            padding-top: 14px;
+        }
+        .buttons>span{
+            font-size: 14px;
+            color: #666666;
+            display: inline-block;
+            text-align: center;
+            line-height: 32px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            margin: 0 16px;
+            box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.75);
+            background: linear-gradient(to bottom, #ffffff 0%,#c7c5c9 100%);
+        }
+        .buttons>span.red{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div id="window" class="window">
+    <div class="wrapper">
+        <div id="images" class="images">
+            <img src="../轮播初实现/luffy.jpg" alt="" width="300px" height="300px">
+            <img src="../轮播初实现/nami.jpg" alt="" width="300px" height="300px">
+            <img src="../轮播初实现/wusuopu.jpg" alt="" width="300px" height="300px">
+            <img src="../轮播初实现/zoro.jpg" alt="" width="300px" height="300px">
+        </div>
+    </div>
+</div>
+<div id="buttons" class="buttons">
+    <span>1</span>
+    <span>2</span>
+    <span>3</span>
+    <span>4</span>
+</div>
+<script>
+    var allButtons = $('#buttons').children('span');
+    for(let i=0;i<allButtons.length;i++){
+        $(allButtons[i]).on('click',function (x) {
+            $(x.currentTarget).addClass('red').siblings('.red').removeClass('red');
+            var n = ($(x.currentTarget).index())*300;
+            $('#images').css({
+                transform:'translate(-'+n+'px)'
+            })
+        })
+    }
+    var startT = 0;
+    var intervalId = setInterval(function () {
+        startT += 1;
+        var t = startT % allButtons.length;
+        $(allButtons[t]).trigger('click',function (x) {
+            $(x.currentTarget).addClass('red').siblings('.red').removeClass('red');
+            var n = ($(x.currentTarget).index())*300;
+            $('#images').css({
+                transform:'translate(-'+n+'px)'
+            })
+        })
+    },3000)
+    $('#window').on('mouseenter',function () {
+        window.clearInterval(intervalId);
+    })
+    $('#window').on('mouseleave',function () {
+        intervalId = setInterval(function () {
+            startT += 1;
+            var t = startT % allButtons.length;
+            $(allButtons[t]).trigger('click',function (x) {
+                $(x.currentTarget).addClass('red').siblings('.red').removeClass('red');
+                var n = ($(x.currentTarget).index())*300;
+                $('#images').css({
+                    transform:'translate(-'+n+'px)'
+                })
+            })
+        },3000)
+    })
+
+</script>
+</body>
+</html>

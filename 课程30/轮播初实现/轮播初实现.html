@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>轮播初实现</title>
+    <script src="../内容样式行为分离/jquery-3.4.1.js"></script>
+    <style>
+        .main{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .images{
+            display: flex;
+            /* Pack flex items from the start */
+            align-items: flex-start;
+            transition: transform 0.6s;
+        }
+        .window{
+            width: 300px;
+            overflow: hidden;
+            text-align: center;
+        }
+        .buttons{
+            margin-top: 4px;
+        }
+        .buttons > button{
+            margin: 0 8px;
+        }
+    </style>
+</head>
+<body>
+<main class="main">
+    <div class="window">
+        <div id="images" class="images">
+            <img src="luffy.jpg" alt="" width="300">
+            <img src="nami.jpg" alt="" width="300">
+            <img src="zoro.jpg" alt="" width="300">
+        </div>
+        <div class="buttons">
+            <button id="button1">路飞</button>
+            <button id="button2">娜美</button>
+            <button id="button3">索隆</button>
+        </div>
+    </div>
+</main>
+<script>
+    $('#button1').on('click',function () {
+        $('#images').css({
+            transform:'translate(0)'
+        })
+    })
+    $('#button2').on('click',function () {
+        $('#images').css({
+            transform:'translate(-300px)'
+        })
+    })
+    $('#button3').on('click',function () {
+        $('#images').css({
+            transform:'translate(-600px)'
+        })
+    })
+</script>
+</body>
+</html>
