@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOMLevel2</title>
+</head>
+<body>
+    <button id="xxx">按钮</button>
+    <script>
+        // DOM Level 0
+        /*xxx.onclick = function () {
+            console.log(1)
+        }
+        xxx.onclick = function () {
+            console.log(2)
+        }*/
+        // DOM Level 0有诸多问题
+        // xxx.onclick只是一个属性
+        // 例如上面的例子对于id为xxx的按钮绑定onclick的事件
+        // 只能绑定一个事件 后面绑定会覆盖 前面绑定的事件
+        function f1(){
+            console.log(1);
+        }
+        function f2(){
+            console.log(2);
+        }
+        function f3(){
+            console.log(3)
+        }
+        xxx.addEventListener('click',f1);
+        xxx.addEventListener('click',f2);
+        xxx.removeEventListener('click',f1);
+        xxx.addEventListener('click',f3);
+        // 相比于DOM Level 0
+        // DOM Level 2 的Event事件支持添加多个事件
+        // 可以说就是一个队列(回想一下队列的特性：FIFO)
+        // 所以添加的事件会依次执行，点击按钮在控制台上先后打印结果2,3
+    </script>
+</body>
+</html>

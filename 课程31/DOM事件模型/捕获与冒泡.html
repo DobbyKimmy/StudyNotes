@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件模型：捕获与冒泡</title>
+    <style>
+        div{
+            border: 1px solid red;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="grandfather">
+        爷爷
+        <div id="father">
+            爸爸
+            <div id="son">
+                儿子
+            </div>
+        </div>
+    </div>
+    <script>
+        son.addEventListener('click',function () {
+            console.log('son')
+        },true)
+        father.addEventListener('click',function () {
+            console.log('father')
+        },true)
+        grandfather.addEventListener('click',function () {
+            console.log('grandfather')
+        },true)
+    </script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>一次监听</title>
+</head>
+<body>
+<button id="xxx">按钮</button>
+<script>
+    function fn(){
+        console.log(1);
+        xxx.removeEventListener('click',fn);
+    }
+    xxx.addEventListener('click',fn);
+    // 点击按钮，只打印出一次 1
+</script>
+</body>
+</html>

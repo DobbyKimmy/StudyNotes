@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>有关DOM(level0)的一个小问题2</title>
+</head>
+<body>
+<button id="X">1</button>
+<button id="Y">2</button>
+<button id="Z">3</button>
+<script>
+    function print() {
+        console.log('hi');
+    }
+    // 当点击哪一个按钮时,会在控制台上打印出"hi"
+    X.onclick = print;
+    Y.onclick = print();
+    Z.onclick = print.call();
+</script>
+</body>
+</html>

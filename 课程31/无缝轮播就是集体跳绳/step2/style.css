@@ -1,0 +1,29 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.window{
+    width: 400px;
+    height: 400px;
+    margin: 20px auto;
+    overflow: hidden;
+}
+.images{
+    width: 100%;
+    position: relative;
+}
+.images>img{
+    position: absolute;
+    top: 0;
+    transition: all 0.5s;
+}
+.images>img.current{
+    position: absolute;
+    left: 0;
+    z-index: 1;
+}
+.images>img.enter{
+    position: absolute;
+    left: 100%;
+}
