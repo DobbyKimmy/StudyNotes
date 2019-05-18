@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>冒泡可视化</title>
+    <style>
+        .purple{
+            width: 100px;
+            height: 100px;
+            background: purple;
+        }
+        .red.active{
+            background: red;
+        }
+        .green.active{
+            background: green;}
+        .yellow.active{
+            background: yellow;
+        }
+        .blue.active{
+            background: blue;
+        }
+        .orange.active{
+            background: orange;
+        }
+        div{
+            border-radius: 50%;
+            display: inline-block;
+            padding: 10px;
+            transition: all 0.5s;
+        }
+    </style>
+</head>
+<body>
+    <div class="red">
+        <div class="orange">
+            <div class="yellow">
+                <div class="green">
+                    <div class="blue">
+                        <div class="purple">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        var n = 0;
+        $('div').on('click',(e)=>{
+            setTimeout(()=>{
+                $(e.currentTarget).addClass('active');
+            },n*500)
+            n+=1;
+        })
+
+    </script>
+</body>
+</html>

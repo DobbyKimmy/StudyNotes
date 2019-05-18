@@ -1,0 +1,22 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.window{
+    width: 400px;
+    height: 400px;
+    margin: 40px auto;
+    overflow: hidden;
+}
+.window > .images{
+    display: flex;
+    width: 100%;
+    transition: all 0.5s;
+}
+.window > .images >img{
+
+}
+.buttonWrapper{
+    text-align: center;
+}

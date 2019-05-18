@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MySlideShow</title>
+    <style type="text/css">
+        .icon {
+            width: 2em; height: 2em;
+            vertical-align: -0.15em;
+            fill: currentColor;
+            overflow: hidden;
+        }
+
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        .window{
+            width: 400px;
+            height: 400px;
+            overflow: hidden;
+            margin: 40px auto;
+        }
+        .images{
+            transition: all 0.5s;
+            width: 100%;
+            display: flex;
+        }
+        .buttonWrapper{
+            text-align: center;
+        }
+        .buttonWrapper>svg{
+            margin: 4px 16px;
+        }
+        .buttonWrapper>svg:hover{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="window">
+        <div id="slide" class="images">
+            <img src="./img/luffy.jpg" alt="路飞" width="400" height="400">
+            <img src="./img/zoro.jpg" alt="索隆" width="400" height="400">
+            <img src="./img/shanzhi.jpg" alt="山治" width="400" height="400">
+            <img src="./img/nami.jpg" alt="娜美" width="400" height="400">
+        </div>
+    </div>
+    <div class="buttonWrapper">
+        <svg id="previous" class="icon" aria-hidden="true">
+            <use xlink:href="#icon-lefthand"></use>
+        </svg>
+        <svg id="next" class="icon" aria-hidden="true">
+            <use xlink:href="#icon-righthand"></use>
+        </svg>
+    </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="//at.alicdn.com/t/font_1195442_7fui7mqkiho.js"></script>
+    <script src="main.js">
+
+    </script>
+</body>
+</html>

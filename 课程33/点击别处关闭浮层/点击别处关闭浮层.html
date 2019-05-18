@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>点击别处关闭浮层</title>
+    <style>
+        .wrapper{
+            position: relative;
+            display: inline-block;
+        }
+        .popover{
+            margin-left: 10px;
+            padding: 10px;
+            position: absolute;
+            border: 1px solid red;
+            left: 100%;
+            top: 0;
+            white-space: nowrap;
+            display: none;
+        }
+        .popover::before{
+            content: '';
+            border-right: 10px solid red;
+            border-top: 10px solid transparent;
+            border-left: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            position: absolute;
+            top: 5px;
+            right: 100%;
+        }
+        .popover::after{
+            content: '';
+            border-right: 10px solid white;
+            border-top: 10px solid transparent;
+            border-left: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            position: absolute;
+            top: 5px;
+            right: 100%;
+            margin-right: -1px;
+        }
+    </style>
+</head>
+<body>
+<div id="wrapper" class="wrapper">
+    <button id="clickMe" class="clickMe">点我</button>
+    <div id="popover" class="popover">
+        <input type="checkbox">浮层
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    // 点击别处关闭浮层的第二种方案
+   /* $('#clickMe').on('click',()=>{
+        $('#popover').show();
+        setTimeout(()=>{
+            $(document).one('click', ()=> {
+                $('#popover').hide();
+            })
+        },0)
+    })
+    $('#wrapper').on('click',(e)=>{
+        e.stopPropagation();
+    })*/
+    // DOM
+   /* clickMe.addEventListener('click',function () {
+        popover.style.display = 'block';
+    })
+    wrapper.addEventListener('click',function (e) {
+        e.stopPropagation();
+    })
+    document.addEventListener('click',function () {
+        popover.style.display = 'none';
+    })*/
+   let i = 0;
+    // jQuery
+    $('#clickMe').on('click',()=> {
+        i++;
+        if(i%2===0){
+            $('#popover').hide();
+        }else{
+            $('#popover').show();
+        }
+        // 节省内存的方法
+        $(document).one('click',()=>{
+            $('#popover').hide();
+            i++;
+        })
+    })
+    $('#wrapper').on('click',(e)=>{
+        e.stopPropagation();
+    })
+</script>
+</body>
+</html>

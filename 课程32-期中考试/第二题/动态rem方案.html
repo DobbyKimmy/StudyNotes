@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>动态rem方案</title>
+    <script>
+        var pageWidth = window.innerWidth;
+        document.write('<style>html{font-size: '+pageWidth+'px;}</style>')
+    </script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            font-size: 16px;
+        }
+        .child{
+            background: #666666;
+            width: 0.4rem;
+            height: 0.2rem;
+            float: left;
+            margin: 0.05rem;
+            text-align: center;
+            line-height: 0.2rem;
+        }
+        .clearfix::after{
+            content: '';
+            display: block;
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+<div class="parent clearfix">
+    <div class="child">box</div>
+    <div class="child">box</div>
+    <div class="child">box</div>
+    <div class="child">box</div>
+</div>
+</body>
+</html>

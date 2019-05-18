@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>快速排序</title>
+</head>
+<body>
+<script>
+    let arr = [5,3,6,12,7];
+    let newArr = quickSort(arr);
+    console.log(newArr);
+    function quickSort(arr) {
+        let len = arr.length;
+        if(len<2){
+            return arr
+        }else{
+            let flag = arr[0];
+            let left = [];
+            let right = [];
+            for(let i=1,temp;i<len;i++){
+                temp = arr[i];
+                if(temp<flag){
+                    left.push(temp);
+                }else{
+                    right.push(temp)
+                }
+            }
+            return quickSort(left).concat(flag,quickSort(right));
+        }
+    }
+</script>
+</body>
+</html>
