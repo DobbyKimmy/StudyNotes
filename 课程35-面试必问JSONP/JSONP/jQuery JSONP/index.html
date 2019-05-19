@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h5>您的账余额是 <span id="amount">&amount</span></h5>
+<button id="btn">付款</button>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    btn.addEventListener('click',function () {
+        $.ajax({
+            url: "http://jack.com:8001/pay",
+
+            // The name of the callback parameter, as specified by the YQL service
+            jsonp: "callback",
+
+            // Tell jQuery we're expecting JSONP
+            dataType: "jsonp",
+
+            // Tell YQL what we want and that we want JSON
+            data: {
+                q: "select title,abstract,url from search.news where query=\"cat\"",
+                format: "json"
+            },
+
+            // Work with the response
+            success: function( response ) {
+                if(response === 'success'){
+                    amount.innerText = amount.innerText - 1;
+                }
+            }
+        });
+    })
+</script>
+</body>
+</html>

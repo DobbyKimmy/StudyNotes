@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>你咬我啊</title>
+</head>
+<body>
+<button id="btn">你咬我啊</button>
+<script>
+    btn.addEventListener('click',()=>{
+        let request = new XMLHttpRequest();
+        request.open('POST','http://dobby.com:8888/xxx');
+        request.send();
+        request.onreadystatechange = ()=>{
+            // 请求及响应均成功
+            if(request.readyState === 4){
+                if(request.status>=200 && request.status<300){
+                    let string = request.responseText;
+                    let obj = window.JSON.parse(string);
+                    console.log(string);
+                    console.log(obj);
+                }else{console.log('fail');}
+            }
+        }
+    })
+</script>
+</body>
+</html>
