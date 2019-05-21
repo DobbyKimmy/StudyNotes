@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自己实现一个AJAX</title>
+</head>
+<body>
+<button id="btn">click me</button>
+<script>
+    window.jQuery = function () {}
+    window.jQuery.ajax = function({path,method,headers,success,fail,data}){
+        let request = new XMLHttpRequest();
+
+        request.open(method,path);
+        for(let key in headers){
+            let value = headers[key];
+            request.setRequestHeader(key,value);
+        }
+        request.onreadystatechange = ()=>{
+            if(request.readyState === 4){
+                if(request.status>=200 && request.status <300 ){
+                    success(request.responseText);
+                }else if(request.status >=400){
+                    fail(request);
+                }
+            }
+        }
+        request.send(data);
+    }
+    window.$ = window.jQuery;
+
+    function success(responseText) {
+        console.log(responseText);
+    }
+    function fail(request){
+        console.log(request.responseText);
+    }
+
+    btn.addEventListener('click',()=>{
+        window.jQuery.ajax({
+            path:'/xxx',
+            method:'POST',
+            headers:{
+                'Content-Type':'x-www-form-urlencoded',
+                'DobbyKim':'good'
+            },
+            success:success,
+            fail:fail,
+            data:'a=1&b=2'
+        })
+    })
+</script>
+</body>
+</html>

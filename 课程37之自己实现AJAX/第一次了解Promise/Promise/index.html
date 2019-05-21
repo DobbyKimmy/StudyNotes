@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+    <button id="btn">点我</button>
+    <script>
+        btn.addEventListener('click',()=>{
+            $.ajax({
+                url:'/xxx',
+                method:'get',
+            }).then(
+                (responseText)=>{console.log(responseText);return responseText},
+                (request)=>{console.log('error  ');return 'error'}
+            ).then(
+                (result)=>{console.log(result)},
+                (result)=>{console.log('error')}
+            )
+        })
+    </script>
+</body>
+</html>

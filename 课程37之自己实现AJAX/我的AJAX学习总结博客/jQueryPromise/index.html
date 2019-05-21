@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自己实现一个AJAX</title>
+</head>
+<body>
+<button id="btn">click me</button>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+   btn.addEventListener('click',()=>{
+       $.ajax({
+           url:'/xxx',
+           method:'POST',
+       }).then(
+           (responseText)=>{console.log(responseText)},
+           (request)=>{console.log(request.responseText)}
+           )
+   })
+</script>
+</body>
+</html>

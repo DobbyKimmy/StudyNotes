@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>作业第一题</title>
+</head>
+<body>
+<button id="btn">click me</button>
+<script>
+    window.jQuery = function(){};
+    window.jQuery.ajax = function ({url,method,body}) {
+        return new Promise(function (resolve, reject) {
+            let request = new XMLHttpRequest();
+            request.open(method,url);
+            request.onreadystatechange = ()=>{
+                if(request.readyState === 4){
+                    if(request.status >=200 && request.status <300){
+                        resolve.call(undefined,request.responseText);
+                    }else if(request.status >=400){
+                        reject.call(undefined,request);
+                    }
+                }
+            }
+            request.send(body);
+        })
+    }
+    window.$ = window.jQuery;
+
+    let btn = document.querySelector('#btn');
+    btn.addEventListener('click',()=>{
+        window.$.ajax({
+            url:'/yyy',
+            method:'post',
+            body:'a=1&b=2'
+        }).then(
+            (responseText)=>{console.log(responseText)},
+            (requeset)=>{console.log(requeset)}
+        )
+    })
+</script>
+</body>
+</html>

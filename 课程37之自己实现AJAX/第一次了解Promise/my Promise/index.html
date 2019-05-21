@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自己实现window.jQuery.ajax</title>
+</head>
+<body>
+<button id="myButton">点我</button>
+<script>
+    window.jQuery = function(){};
+    window.jQuery.ajax = function ({url,method,body,headers}) {
+        return new Promise(function (resolve,reject){
+            let request = new XMLHttpRequest();
+            request.open(method,url);
+            for(let key in headers){
+                let value = headers[key];
+                request.setRequestHeader(key,value);
+            }
+            request.onreadystatechange = ()=>{
+                if(request.readyState === 4){
+                    if(request.status >=200 && request.status <300){
+                        resolve.call(undefined,request.responseText);
+                    }else if(request.status >=400){
+                        reject.call(undefined,request);
+                    }
+                }
+            }
+            request.send(body);
+        } )
+    }
+    window.$ = window.jQuery;
+    myButton.addEventListener('click', (e)=> {
+        window.jQuery.ajax({
+            url:'/yyy',
+            method:'post',
+            headers:{
+              "Content-Type":"application/x-www-form-urlencoded",
+              "DobbyKim":"18"
+            }
+        }).then(
+            (responseText)=>{console.log(responseText)},
+            (request)=>{console.log(request)}
+        );
+    })
+</script>
+</body>
+</html>
